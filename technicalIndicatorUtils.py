@@ -111,8 +111,8 @@ def execute_OBV_EMA(data, use_stop_loss=False):
             cumulativeCapital = holdQty * sellPrice
             percentGain = 100 * (sellPrice - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -122,8 +122,8 @@ def execute_OBV_EMA(data, use_stop_loss=False):
             cumulativeCapital = holdQty * dayClose
             percentGain = 100 * (dayClose - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -131,14 +131,14 @@ def execute_OBV_EMA(data, use_stop_loss=False):
             isHolding = False
         else:
             continue
-        stopLoss = dayClose - 7 * data.ATR[i]
+        stopLoss = dayClose - 2 * data.ATR[i]
     
     cumulativePercentageChange = np.round(cumulativeCapital - 100, 3)
     netPercentGains = np.round(netPercentGains, 3)
     maxLoss = np.round(maxLoss, 3)
     maxGain = np.round(maxGain, 3)
     
-    return f'Wins:{wins}, max gain:{maxGain} \nLosses:{loss}, max loss: {maxLoss}\nCumulative Percentage Gains: {cumulativePercentageChange}% \nSum of independent percentage gains: {netPercentGains}%'
+    return f'Wins:{wins}, max gain:{maxGain}% \nLosses:{loss}, max loss: {maxLoss}%\nCompounded Percentage Gains: {cumulativePercentageChange}% \nCumulative percentage gains: {netPercentGains}%'
 
 # MACD crossover strategy
 def execute_MACD(data, use_stop_loss=False):
@@ -174,8 +174,8 @@ def execute_MACD(data, use_stop_loss=False):
             cumulativeCapital = holdQty * sellPrice
             percentGain = 100 * (sellPrice - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -185,8 +185,8 @@ def execute_MACD(data, use_stop_loss=False):
             cumulativeCapital = holdQty * dayClose
             percentGain = 100 * (dayClose - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -201,7 +201,7 @@ def execute_MACD(data, use_stop_loss=False):
     maxLoss = np.round(maxLoss, 3)
     maxGain = np.round(maxGain, 3)
     
-    return f'Wins:{wins}, max gain:{maxGain} \nLosses:{loss}, max loss: {maxLoss}\nCumulative Percentage Gains: {cumulativePercentageChange}% \nSum of independent percentage gains: {netPercentGains}%'
+    return f'Wins:{wins}, max gain:{maxGain}% \nLosses:{loss}, max loss: {maxLoss}%\nCompounded Percentage Gains: {cumulativePercentageChange}% \nCumulative percentage gains: {netPercentGains}%'
 
 # OBV and MACD strategy combined
 def execute_MACD_OBV(data, use_stop_loss=False):
@@ -229,8 +229,8 @@ def execute_MACD_OBV(data, use_stop_loss=False):
             cumulativeCapital = holdQty * sellPrice
             percentGain = 100 * (sellPrice - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -240,8 +240,8 @@ def execute_MACD_OBV(data, use_stop_loss=False):
             cumulativeCapital = holdQty * dayClose
             percentGain = 100 * (dayClose - prevBuyPrice) / prevBuyPrice
             netPercentGains = netPercentGains + percentGain
-            maxLoss = min(maxLoss, netPercentGains)
-            maxGain = max(maxGain, netPercentGains)
+            maxLoss = min(maxLoss, percentGain)
+            maxGain = max(maxGain, percentGain)
             if(percentGain > 0):
                 wins += 1
             else:
@@ -256,7 +256,7 @@ def execute_MACD_OBV(data, use_stop_loss=False):
     maxLoss = np.round(maxLoss, 3)
     maxGain = np.round(maxGain, 3)
     
-    return f'Wins:{wins}, max gain:{maxGain} \nLosses:{loss}, max loss: {maxLoss}\nCumulative Percentage Gains: {cumulativePercentageChange}% \nSum of independent percentage gains: {netPercentGains}%'
+    return f'Wins:{wins}, max gain:{maxGain}% \nLosses:{loss}, max loss: {maxLoss}%\nCompounded Percentage Gains: {cumulativePercentageChange}% \nCumulative percentage gains: {netPercentGains}%'
     
 def plot_close_price(df):
     # View closing price
